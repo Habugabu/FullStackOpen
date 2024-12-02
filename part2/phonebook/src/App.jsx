@@ -23,7 +23,20 @@ const App = () => {
     event.preventDefault()
     const names = persons.map(person => person.name)
     if (names.includes(newName)){
-      alert(`${newName} is already added to phonebook`)
+      if (confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
+        const personObject = {
+          name: newName,
+          number: newNumber,
+          id: persons.find(person => person.name === newName).id
+        }
+        personService
+          .update(personObject.id, personObject)
+          .then(returnedPerson => {
+            setPersons(persons.filter(person => person.id !== returnedPerson.id).concat(returnedPerson))
+            setNewName('')
+            setNewNumber('')
+          })
+      }
     }
     else if (newName == ''){
       alert('Please input a name')
@@ -56,6 +69,17 @@ const App = () => {
     setNewFilter(event.target.value)
   }
 
+  const handleDelete = (event) => {
+    if(confirm(`Delete ${event.target.name}?`)){
+      personService
+        .remove(event.target.id)
+        .then(returnedPerson => {
+          setPersons(persons.filter(person => person.id !== returnedPerson.id))
+        })
+    }
+    
+  }
+
   const personsToShow = persons.filter(person => person.name.toUpperCase().includes(filter.toUpperCase()) === true)
 
   return (
@@ -71,7 +95,7 @@ const App = () => {
         onNumberChange={handleNumberChange}
       />
       <h2>Numbers</h2>
-      <Persons persons={personsToShow}/>
+      <Persons persons={personsToShow} onDelete={handleDelete}/>
     </div>
   )
 }
