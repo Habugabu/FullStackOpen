@@ -4,12 +4,14 @@ import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import Filter from './components/Filter'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setNewFilter] = useState('')
+  const [notification, setNotification] = useState({text: '', type: ''})
 
   useEffect(()=>{
     personService
@@ -35,6 +37,16 @@ const App = () => {
             setPersons(persons.filter(person => person.id !== returnedPerson.id).concat(returnedPerson))
             setNewName('')
             setNewNumber('')
+            setNotification({text: `Updated the number of ${returnedPerson.name} to ${returnedPerson.number}`, type: 'success'})
+            setTimeout(() => {
+              setNotification({text: '', type: ''})
+            }, 5000)
+          })
+          .catch(error => {
+            setNotification({text: `Information of ${personObject.name} has already been removed from server`, type: 'error'})
+            setTimeout(() => {
+              setNotification({text: '', type: ''})
+            }, 5000)
           })
       }
     }
@@ -45,6 +57,7 @@ const App = () => {
       const personObject = {
         name: newName,
         number: newNumber,
+        //assign (currently highest id + 1) as the new id
         id: `${persons.map(person => person.id).reduce((p, c) => Math.max(p, c)) + 1}`
       }
       personService
@@ -53,6 +66,10 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
+          setNotification({text: `Added ${returnedPerson.name}`, type: 'success'})
+          setTimeout(() => {
+            setNotification({text: '', type: ''})
+          }, 5000)
         })
     }
   }
@@ -75,6 +92,16 @@ const App = () => {
         .remove(event.target.id)
         .then(returnedPerson => {
           setPersons(persons.filter(person => person.id !== returnedPerson.id))
+          setNotification({text: `Removed ${returnedPerson.name}`, type: 'success'})
+          setTimeout(() => {
+            setNotification({text: '', type: ''})
+          }, 5000)
+        })
+        .catch(error => {
+          setNotification({text: `Information of ${event.target.name} has already been removed from server`, type: 'error'})
+          setTimeout(() => {
+            setNotification({text: '', type: ''})
+          }, 5000)
         })
     }
     
@@ -85,6 +112,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification text={notification.text} type={notification.type}/>
       <Filter filter={filter} onChange={handleFilterChange}/>
       <h2>Add new entry</h2>
       <PersonForm 
