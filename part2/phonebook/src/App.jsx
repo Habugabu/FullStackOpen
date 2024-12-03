@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(()=>{
     personService
-      .getAll
+      .getAll()
       .then(initialPersons => {
         setPersons(initialPersons)
       })
