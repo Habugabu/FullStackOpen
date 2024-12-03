@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(()=>{
     personService
-      .getAll('http://localhost:3001/persons')
+      .getAll
       .then(initialPersons => {
         setPersons(initialPersons)
       })
