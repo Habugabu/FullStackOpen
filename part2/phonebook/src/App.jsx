@@ -90,9 +90,9 @@ const App = () => {
     if(confirm(`Delete ${event.target.name}?`)){
       personService
         .remove(event.target.id)
-        .then(returnedPerson => {
-          setPersons(persons.filter(person => person.id !== returnedPerson.id))
-          setNotification({text: `Removed ${returnedPerson.name}`, type: 'success'})
+        .then(response => {
+          setPersons(persons.filter(person => person.id !== event.target.id))
+          setNotification({text: `Removed ${event.target.name}`, type: 'success'})
           setTimeout(() => {
             setNotification({text: '', type: ''})
           }, 5000)
