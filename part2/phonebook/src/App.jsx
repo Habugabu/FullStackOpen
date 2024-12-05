@@ -43,7 +43,7 @@ const App = () => {
             }, 5000)
           })
           .catch(error => {
-            setNotification({text: `Information of ${personObject.name} has already been removed from server`, type: 'error'})
+            setNotification({text: error.response.data.error, type: 'error'})
             setTimeout(() => {
               setNotification({text: '', type: ''})
             }, 5000)
@@ -53,12 +53,13 @@ const App = () => {
     else if (newName == ''){
       alert('Please input a name')
     }
+    else if (newNumber == ''){
+      alert('Please input a number')
+    }
     else {
       const personObject = {
         name: newName,
         number: newNumber,
-        //assign (currently highest id + 1) as the new id
-        id: `${persons.map(person => person.id).reduce((p, c) => Math.max(p, c)) + 1}`
       }
       personService
         .create(personObject)
@@ -67,6 +68,12 @@ const App = () => {
           setNewName('')
           setNewNumber('')
           setNotification({text: `Added ${returnedPerson.name}`, type: 'success'})
+          setTimeout(() => {
+            setNotification({text: '', type: ''})
+          }, 5000)
+        })
+        .catch(error => {
+          setNotification({text: error.response.data.error, type: 'error'})
           setTimeout(() => {
             setNotification({text: '', type: ''})
           }, 5000)
