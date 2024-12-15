@@ -11,6 +11,6 @@ Parts 0-2 in this repository, other parts:
   - https://github.com/Habugabu/unicafe-redux
   - https://github.com/Habugabu/anecdotes-redux  
 - Part 7
-  - https://github.com/Habugabu/anecdotes-router
+  - https://github.com/Habugabu/anecdotes-routed
   - https://github.com/Habugabu/FullStackOpenPart4/tree/part7
   - https://github.com/Habugabu/FullStackOpenPart5/tree/part7
