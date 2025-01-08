@@ -9,7 +9,8 @@ Parts 0-2 in this repository, other parts:
   - https://github.com/Habugabu/FullStackOpenPart5Tests
 - Part 6
   - https://github.com/Habugabu/unicafe-redux
-  - https://github.com/Habugabu/anecdotes-redux  
+  - https://github.com/Habugabu/anecdotes-redux
+  - https://github.com/Habugabu/query-anecdotes
 - Part 7
   - https://github.com/Habugabu/anecdotes-routed
   - https://github.com/Habugabu/FullStackOpenPart4/tree/part7
