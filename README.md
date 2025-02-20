@@ -15,3 +15,6 @@ Parts 0-2 in this repository, other parts:
   - https://github.com/Habugabu/anecdotes-routed
   - https://github.com/Habugabu/FullStackOpenPart4/tree/part7
   - https://github.com/Habugabu/FullStackOpenPart5/tree/part7
+- Part 8
+  - https://github.com/Habugabu/FSOp8library-backend
+  - https://github.com/Habugabu/FSOp8library-frontend
