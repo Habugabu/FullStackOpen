@@ -23,3 +23,5 @@ Parts 0-2 in this repository, other parts:
   - https://github.com/Habugabu/FullStackOpenPart9
 - Part 10
   - https://github.com/Habugabu/FullStackOpenPart10
+- Part 11
+  - https://github.com/Habugabu/full-stack-open-pokedex
